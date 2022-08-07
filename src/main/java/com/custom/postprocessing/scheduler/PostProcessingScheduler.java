@@ -157,12 +157,6 @@ public class PostProcessingScheduler {
 	@Value("${claim.number}")
 	private String dcnClaimNbr;
 
-	@Value("${mail.pcl.status}")
-	private String pclMailStatus;
-
-	@Value("${mail.pcl.status.part2}")
-	private String pclMailStatusPart2;
-
 	@Value("${archive.temp.directory}")
 	private String archiveTempDirectory;
 
@@ -337,7 +331,7 @@ public class PostProcessingScheduler {
 				} else {
 					dstBlobClient.beginCopy(updateSrcUrl, null);
 					srcBlobClient.delete();
-					// new File(fileName).delete();
+					new File(fileName).delete();
 					archiveMap.put("nonarchive", "true");
 				}
 			}
@@ -504,7 +498,7 @@ public class PostProcessingScheduler {
 		}
 
 		if (postProcessMap.size() > 0) {
-			emailUtility.emailProcess(pclFileList, currentDate, pclMailStatus + currentDate + pclMailStatusPart2);
+			emailUtility.emailProcess(pclFileList, currentDate, "PCL Creation process is completed successfully " + currentDate);
 		}
 
 		deleteFiles(pclFileList);
@@ -811,6 +805,6 @@ public class PostProcessingScheduler {
 
 	public void mailTest() {
 		String currentDate = currentDate();
-		emailUtility.sendEmail(pclFileList, currentDate, pclMailStatus + currentDate + pclMailStatusPart2);
+		emailUtility.sendEmail(pclFileList, currentDate, "PCL Creation process is completed successfully " + currentDate);
 	}
 }
