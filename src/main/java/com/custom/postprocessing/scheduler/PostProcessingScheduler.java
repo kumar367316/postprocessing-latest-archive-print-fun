@@ -166,9 +166,6 @@ public class PostProcessingScheduler {
 	@Value("${archive.temp.directory}")
 	private String archiveTempDirectory;
 
-	@Value("${temp.folder.remove.enable}")
-	private boolean tempFolderRemoveEnable;
-
 	@Autowired
 	EmailUtility emailUtility;
 
